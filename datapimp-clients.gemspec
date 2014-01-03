@@ -5,7 +5,7 @@ require 'datapimp/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "datapimp-clients"
-  spec.version       = Datapimp::VERSION
+  spec.version       = Datapimp::ClientsVersion
   spec.authors       = ["Jonathan Soeder"]
   spec.email         = ["jonathan.soeder@gmail.com"]
   spec.description   = %q{API Client Implementations}
@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'colored'
   spec.add_dependency 'redis'
   spec.add_dependency 'redis-objects'
+  spec.add_dependency 'commander'
 
   spec.add_development_dependency 'guard'
 

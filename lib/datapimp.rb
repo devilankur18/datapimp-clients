@@ -17,6 +17,8 @@ module Datapimp
   autoload :Github
   autoload :Amazon
 
+  ClientsVersion = '0.0.1'
+
   def self.config
     Configuration
   end
