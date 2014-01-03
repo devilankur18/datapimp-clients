@@ -15,9 +15,9 @@ $:.unshift Dir.pwd() + '/lib'
 
 require "#{ Dir.pwd() }/lib/datapimp.rb"
 
-program :name, 'Datapimp'
-program :version, Datapimp::VERSION
-program :description, 'Datapimp style command line utilities'
+program :name, 'Datapimp Clients'
+program :version, Datapimp::Clients::Version
+program :description, 'Datapimp command line utilities'
 
 command :smoke do |c|
   c.syntax = 'datapimp smoke [options]'
@@ -30,4 +30,3 @@ command :smoke do |c|
     Datapimp::Smoke.run(path: options.path)
   end
 end
-

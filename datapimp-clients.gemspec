@@ -1,11 +1,12 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'datapimp/version'
+
+require 'datapimp/clients/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "datapimp-clients"
-  spec.version       = Datapimp::ClientsVersion
+  spec.version       = Datapimp::Clients::Version
   spec.authors       = ["Jonathan Soeder"]
   spec.email         = ["jonathan.soeder@gmail.com"]
   spec.description   = %q{API Client Implementations}
