@@ -1,5 +1,5 @@
 require 'typhoeus'
-require 'datapimp/clients/github/request_wrapper'
+require 'datapimp/github/request_wrapper'
 
 class Datapimp::Github::Client
   attr_accessor :options, :cache

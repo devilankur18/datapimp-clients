@@ -1,6 +1,5 @@
 smoke "The Github Client" do
   let(:client) do
-    Datapimp::Clients::Github.eager_load!
     Datapimp.github_client
   end
 
