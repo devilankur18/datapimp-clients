@@ -5,6 +5,8 @@ module Datapimp::Amazon
 
   mattr_accessor :access_key_id, :secret_access_key
 
+  autoload :STS
+
   def self.access_key_id
     @@access_key_id || Datapimp.profile.amazon_access_key_id || ENV['ACCESS_KEY_ID']
   end

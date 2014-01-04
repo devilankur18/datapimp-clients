@@ -11,13 +11,10 @@ require 'datapimp/clients/version'
 
 module Datapimp
   extend ActiveSupport::Concern
-  extend ActiveSupport::Autoload
 
-  autoload :Configuration
-  autoload :Smoke
-  autoload :ClientsVersion
-  autoload :Github
-  autoload :Amazon
+  require 'datapimp/clients/version'
+  require 'datapimp/github'
+  require 'datapimp/amazon'
 
   def self.config
     Configuration
