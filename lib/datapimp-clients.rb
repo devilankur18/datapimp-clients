@@ -9,8 +9,8 @@ rescue
   require 'datapimp'
 end
 
-require 'github_client'
-require 'amazon_client'
+require 'datapimp-clients/github_client'
+require 'datapimp-clients/amazon_client'
 
 module DatapimpClients
   Version = '0.0.1'
