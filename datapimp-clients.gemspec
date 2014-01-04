@@ -15,17 +15,9 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
   
   spec.add_dependency 'datapimp'
-  spec.add_dependency "hashie"
   spec.add_dependency "aws-sdk" 
-  spec.add_dependency "pry" 
-  spec.add_dependency "pry-nav" 
-  spec.add_dependency 'typhoeus'
-  spec.add_dependency 'colored'
   spec.add_dependency 'redis'
   spec.add_dependency 'redis-objects'
-  spec.add_dependency 'commander'
-
-  spec.add_development_dependency 'guard'
 
   spec.files         = `git ls-files`.split("\n")
   spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

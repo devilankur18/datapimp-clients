@@ -1,7 +1,7 @@
 require "rubygems"
 require "aws-sdk"
 
-module Amazon
+module AmazonClient
   class STS
     DefaultDuration = 60 * 60
 

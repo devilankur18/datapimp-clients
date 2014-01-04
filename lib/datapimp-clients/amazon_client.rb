@@ -1,11 +1,8 @@
 require "aws-sdk"
-
 module AmazonClient
-  extend ActiveSupport::Autoload
-
   mattr_accessor :access_key_id, :secret_access_key
 
-  autoload :STS
+  require 'datapimp-clients/amazon_client/sts'
 
   def self.access_key_id
     @@access_key_id || Datapimp.profile.amazon_access_key_id || ENV['ACCESS_KEY_ID']
