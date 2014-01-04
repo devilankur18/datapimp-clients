@@ -35,9 +35,3 @@ module Datapimp::Amazon
     AWS::S3.new sts.credentials
   end
 end
-
-if defined?(::Rails)
-  if File.exists?(Rails.root.join("config","aws.yml"))
-    # IMPLEMENT
-  end
-end
