@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'redis'
   spec.add_dependency 'redis-objects'
   spec.add_dependency 'commander'
+  spec.add_dependency 'datapimp'
 
   spec.add_development_dependency 'guard'
 
