@@ -1,10 +1,12 @@
 begin
   require "active_support/core_ext"
   require 'hashie'
+  require 'datapimp'
 rescue
   require "rubygems"
   require "active_support/core_ext"
   require 'hashie'
+  require 'datapimp'
 end
 
 require 'datapimp/clients/version'
