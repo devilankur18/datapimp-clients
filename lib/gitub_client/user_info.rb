@@ -1,9 +1,7 @@
-module Datapimp
-  module Github
+  module GithubClient
     class UserInfo < Request
       def endpoint
         "users/#{ user }"
       end
     end
   end
-end

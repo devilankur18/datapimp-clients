@@ -1,6 +1,6 @@
 require "aws-sdk"
 
-module Datapimp::Amazon
+module AmazonClient
   extend ActiveSupport::Autoload
 
   mattr_accessor :access_key_id, :secret_access_key
@@ -31,7 +31,7 @@ module Datapimp::Amazon
   end
 
   def self.temporary_s3 options={}
-    sts = Datapimp::Amazon::STS.new
+    sts = AmazonClient::STS.new
     AWS::S3.new sts.credentials
   end
 end

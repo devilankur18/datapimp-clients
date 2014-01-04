@@ -1,4 +1,3 @@
-module Datapimp
   module Github
     class OrganizationActivity < Request
       def endpoint
@@ -6,4 +5,3 @@ module Datapimp
       end
     end
   end
-end

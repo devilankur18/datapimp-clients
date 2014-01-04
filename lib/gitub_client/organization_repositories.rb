@@ -1,4 +1,3 @@
-module Datapimp
   module Github
     class OrganizationRepositories < Request
       def org
@@ -20,4 +19,3 @@ module Datapimp
       end
     end
   end
-end

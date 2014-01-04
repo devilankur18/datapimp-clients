@@ -1,6 +1,5 @@
-module Datapimp
-  module Github
-    class IssueLabels < Datapimp::Github::Request
+  module GithubClient
+    class IssueLabels < GithubClient::Request
       Defaults = {
         # stage labels
         "s:backlog"       => "c7def8",
@@ -60,4 +59,3 @@ module Datapimp
       end
     end
   end
-end

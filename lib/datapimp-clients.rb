@@ -9,24 +9,9 @@ rescue
   require 'datapimp'
 end
 
-require 'datapimp/clients/version'
+require 'github_client'
+require 'amazon_client'
 
-module Datapimp
-  extend ActiveSupport::Concern
-
-  require 'datapimp/clients/version'
-  require 'datapimp/github'
-  require 'datapimp/amazon'
-
-  def self.config
-    Configuration
-  end
-
-  def self.profile
-    config.profile
-  end
-
-  def self.github_client
-    Datapimp::Github::Client.new(gitub_token: Datapimp.profile.github_token)
-  end
+module DatapimpClients
+  Version = '0.0.1'
 end

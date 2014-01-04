@@ -1,4 +1,4 @@
-class Datapimp::Github::Request
+class GithubClient::Request
 
   attr_accessor :options, :user, :org, :repo, :params, :headers, :github_token
 
@@ -43,7 +43,7 @@ class Datapimp::Github::Request
 
   def client
     if impersonate_user.present?
-      return @client ||= Datapimp::Github::Client.new(user: impersonate_user, headers: headers, github_token: github_token)
+      return @client ||= GithubClient::Client.new(user: impersonate_user, headers: headers, github_token: github_token)
     end
 
     @client ||= Datapimp.github_client

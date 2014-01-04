@@ -1,7 +1,7 @@
 require 'typhoeus'
-require 'datapimp/github/request_wrapper'
+require 'github_client/request_wrapper'
 
-class Datapimp::Github::Client
+class GithubClient::Client
   attr_accessor :options, :cache
 
   InvalidAuth = Class.new(Exception)
@@ -11,7 +11,7 @@ class Datapimp::Github::Client
   end
 
   def request_wrapper_class
-    Datapimp::Github::RequestWrapper
+    GithubClient::RequestWrapper
   end
 
   def fetch(request_type,*args)
@@ -22,7 +22,7 @@ class Datapimp::Github::Client
     options = args.extract_options!
     request_type = request_type.to_s.camelize
 
-    if request_klass = Datapimp::Github.const_get(request_type) rescue nil
+    if request_klass = GithubClient.const_get(request_type) rescue nil
       request_klass.new(options)
     end
   end

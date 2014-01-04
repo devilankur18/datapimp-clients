@@ -1,8 +1,7 @@
-module Datapimp
   module Github
     class RepositoryLabels < Request
       def org
-        @org || Datapimp::Github.default_organization
+        @org || GithubClient.default_organization
       end
 
       def endpoint
@@ -19,4 +18,3 @@ module Datapimp
 
     end
   end
-end
