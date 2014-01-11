@@ -1,4 +1,5 @@
 require "aws-sdk"
+
 module AmazonClient
   mattr_accessor :access_key_id, :secret_access_key
 
@@ -29,6 +30,6 @@ module AmazonClient
 
   def self.temporary_s3 options={}
     sts = AmazonClient::STS.new
-    AWS::S3.new sts.credentials
+    AWS::S3.new(sts.credentials)
   end
 end

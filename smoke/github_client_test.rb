@@ -21,4 +21,13 @@ smoke "The Github Client" do
     client.present?
   end
 
+  it "should list issues in a repository" do
+    !client.issues("datapimp/datapimp-clients").empty?
+  end
+
+  it "should list milestones in a repository" do
+    !client.milestones("datapimp/datapimp-clients").empty?
+  end
+
+
 end

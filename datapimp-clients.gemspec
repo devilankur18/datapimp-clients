@@ -2,11 +2,9 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'datapimp-clients'
-
 Gem::Specification.new do |spec|
   spec.name          = "datapimp-clients"
-  spec.version       = DatapimpClients::Version
+  spec.version       = "0.0.1" 
   spec.authors       = ["Jonathan Soeder"]
   spec.email         = ["jonathan.soeder@gmail.com"]
   spec.description   = %q{API Client Implementations}
@@ -16,8 +14,9 @@ Gem::Specification.new do |spec|
   
   spec.add_dependency 'datapimp'
   spec.add_dependency "aws-sdk" 
-  spec.add_dependency 'redis'
-  spec.add_dependency 'redis-objects'
+  spec.add_dependency "urbanairship"
+  spec.add_dependency "redis"
+  spec.add_dependency "redis-objects"
 
   spec.files         = `git ls-files`.split("\n")
   spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
