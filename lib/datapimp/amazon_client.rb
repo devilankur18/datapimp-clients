@@ -1,6 +1,6 @@
 require "aws-sdk"
 
-module AmazonClient
+module Datapimp::AmazonClient
   mattr_accessor :access_key_id, :secret_access_key
 
   require 'datapimp-clients/amazon_client/sts'

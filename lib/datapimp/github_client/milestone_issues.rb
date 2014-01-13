@@ -1,4 +1,4 @@
-module GithubClient
+module Datapimp::GithubClient
   class MilestoneIssues < RepositoryIssues
 
     def params

@@ -1,4 +1,4 @@
-  module Github
+  module Datapimp::Github
     class OrganizationRepositories < Request
       def org
         @org

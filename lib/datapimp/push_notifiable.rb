@@ -1,4 +1,4 @@
-module PushNotifiable
+module Datapimp::PushNotifiable
   extend ActiveSupport::Concern
 
   mattr_accessor :configuration

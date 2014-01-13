@@ -1,4 +1,4 @@
-class GithubClient::Request
+class Datapimp::GithubClient::Request
 
   attr_accessor :options, :user, :org, :repo, :params, :headers, :github_token
 

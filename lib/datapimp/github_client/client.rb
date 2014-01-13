@@ -1,7 +1,7 @@
 require 'typhoeus'
 require 'github_client/request_wrapper'
 
-class GithubClient::Client
+class Datapimp::GithubClient::Client
   attr_accessor :options, :cache
 
   InvalidAuth = Class.new(Exception)

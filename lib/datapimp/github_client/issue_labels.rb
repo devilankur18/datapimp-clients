@@ -1,4 +1,4 @@
-  module GithubClient
+  module Datapimp::GithubClient
     class IssueLabels < GithubClient::Request
       Defaults = {
         # stage labels

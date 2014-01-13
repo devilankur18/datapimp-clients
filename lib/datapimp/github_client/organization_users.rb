@@ -1,4 +1,4 @@
-  module Github
+  module Datapimp::Github
     class OrganizationUsers < Request
       def org
         @org || Datapimp.profile.github_organization

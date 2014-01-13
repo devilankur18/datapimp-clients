@@ -1,4 +1,4 @@
-module GithubClient
+module Datapimp::GithubClient
   class Issues < GithubCient::Request
     def params
       @params.merge(sort:"updated")

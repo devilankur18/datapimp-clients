@@ -1,4 +1,4 @@
-module GithubClient
+module Datapimp::GithubClient
   mattr_accessor :request_cache, :response_cache
 
   def self.request_cache

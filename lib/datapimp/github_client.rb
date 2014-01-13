@@ -1,4 +1,4 @@
-module GithubClient
+module Datapimp::GithubClient
   mattr_accessor :default_github_token,
                   :default_organization
 
@@ -38,3 +38,5 @@ module GithubClient
   end
 
 end
+
+Datapimp::GithubClient.eager_load!

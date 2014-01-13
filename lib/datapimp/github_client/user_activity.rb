@@ -1,4 +1,4 @@
-  module GithubClient
+  module Datapimp::GithubClient
     class UserActivity < Request
 
       def org

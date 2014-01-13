@@ -1,4 +1,4 @@
-  module Github
+  module Datapimp::Github
     class RepositoryIssueEvents < Request
       def org
         @org || GithubClient.default_organization

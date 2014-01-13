@@ -1,4 +1,4 @@
-  module Github
+  module Datapimp::Github
     class RepositoryLabels < Request
       def org
         @org || GithubClient.default_organization

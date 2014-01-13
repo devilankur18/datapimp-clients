@@ -1,4 +1,4 @@
-module GithubClient
+module Datapimp::GithubClient
   class Authentication
     attr_accessor :github_token
 
