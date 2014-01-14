@@ -16,6 +16,7 @@ module Datapimp::GithubClient
     autoload :Authentication
     autoload :Client
     autoload :Request
+    autoload :ResponseObject
     autoload :RequestWrapper
   end
 
@@ -31,9 +32,13 @@ module Datapimp::GithubClient
   autoload :RepositoryLabels
   autoload :RepositoryMilestones
   autoload :SingleRepository
+
   autoload :UserActivity
+  autoload :UserGists
   autoload :UserInfo
   autoload :UserIssues
+  autoload :UserOrganizations
+  autoload :UserRepositories
 
   # Datapimp.github_client is useful for backend apps where there is a Datapimp configuration profile
   Datapimp.define_singleton_method(:github_client) do

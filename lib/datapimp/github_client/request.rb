@@ -1,17 +1,21 @@
+require 'rubygems'
+require 'escape_utils'
+require 'uri_template'
+
 class Datapimp::GithubClient::Request
 
   MissingArguments = Class.new(Exception)
 
   attr_accessor :options, :user, :org, :repo, :params, :headers, :github_token
 
-  class_attribute :_requires_arguments
+  class_attribute :_required_arguments
 
   def self.requires *args
-    (self._requires_arguments = args).uniq!
+    (self._required_arguments = args).uniq!
   end
 
   def self.required_arguments
-    Array(self._requires_arguments).uniq
+    Array(self._required_arguments).uniq
   end
 
   def initialize(options={}, &block)
@@ -25,6 +29,10 @@ class Datapimp::GithubClient::Request
     assert_valid_arguments!
   end
 
+  def required_arguments
+    Array(self.class._required_arguments)
+  end
+
   def with_valid_arguments &blk
     instance_eval(&blk) if block_given?
     assert_valid_arguments!
@@ -32,9 +40,9 @@ class Datapimp::GithubClient::Request
   end
 
   def assert_valid_arguments!
-    return true if _required_arguments.length > 0
+    return true if required_arguments.length > 0
 
-    valid = _required_arguments.all? do |arg|
+    valid = required_arguments.all? do |arg|
       test = false
       test = true if !!self.send(arg).present?
       test = true if options.has_key?(arg)
@@ -46,7 +54,15 @@ class Datapimp::GithubClient::Request
   end
 
   def to_object
-    records.is_a?(Array) ? all : Hashie::Mash.new(records)
+    req = self
+
+    response_wrapper = lambda do |r|
+      Datapimp::GithubClient::ResponseObject.new(r).with_request_object(req)
+    end
+
+    return object.map(&response_wrapper) if object.is_a?(Array)
+
+    response_wrapper.call(object)
   end
 
   def object
@@ -54,7 +70,7 @@ class Datapimp::GithubClient::Request
   end
 
   def all
-    @all ||= records.map {|r| Hashie::Mash.new(r) }
+    to_object
   end
 
   def create params={}
