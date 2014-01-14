@@ -1,11 +1,9 @@
-  module Datapimp::Github
-    class RepositoryIssueEvents < Request
-      def org
-        @org || GithubClient.default_organization
-      end
+module Datapimp::GithubClient
+  class RepositoryIssueEvents < Request
+    requires :org, :repo
 
-      def endpoint
-        "repos/#{ org }/#{ repo }/issues/events"
-      end
+    def endpoint
+      "repos/#{ org }/#{ repo }/issues/events"
     end
   end
+end

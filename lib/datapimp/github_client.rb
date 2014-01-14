@@ -25,6 +25,7 @@ module Datapimp::GithubClient
   autoload :OrganizationActivity
   autoload :OrganizationRepositories
   autoload :OrganizationUsers
+  autoload :OrganizationIssues
   autoload :RepositoryEvents
   autoload :RepositoryIssues
   autoload :RepositoryLabels
@@ -32,9 +33,20 @@ module Datapimp::GithubClient
   autoload :SingleRepository
   autoload :UserActivity
   autoload :UserInfo
+  autoload :UserIssues
 
+  # Datapimp.github_client is useful for backend apps where there is a Datapimp configuration profile
   Datapimp.define_singleton_method(:github_client) do
-    GithubClient::Client.new(github_token: Datapimp.profile.github_token)
+    Datapimp::GithubClient::Client.new(github_token: Datapimp.profile.github_token)
+  end
+
+  # Datapimp.github_client_for(user) is useful for multi-user apps which use the users
+  # github authentication token to make requests on behalf of the user
+  Datapimp.define_singleton_method(:github_client_for) do |user_or_token|
+    key = :user if user_or_token.respond_to?(:github_token)
+    key = :github_token if user_or_token.is_a?(String)
+
+    Datapimp::GithubClient::Client.new(key => user_or_token)
   end
 
 end

@@ -1,21 +1,20 @@
-  module Datapimp::Github
-    class OrganizationRepositories < Request
-      def org
-        @org
-      end
+module Datapimp::GithubClient
+  class OrganizationRepositories < Request
+    requires :supplied_org
 
-      def all
-        @all ||= self.result
-      end
+    def endpoint
+      "orgs/#{ org }/repos"
+    end
 
-      def to_list
-        all.map do |repository|
-          repository.slice("id","name","html_url","description","ssh_url")
-        end
-      end
+    def all
+      @all ||= self.result
+    end
 
-      def endpoint
-        "orgs/#{ org }/repos"
+    def to_list
+      all.map do |repository|
+        repository.slice("id","name","html_url","description","ssh_url")
       end
     end
+
   end
+end

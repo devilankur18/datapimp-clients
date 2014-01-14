@@ -15,8 +15,8 @@ module Datapimp::GithubClient
 
     class_attribute :request_cache, :response_cache
 
-    self.request_cache ||= GithubClient.request_cache
-    self.response_cache ||= GithubClient.response_cache
+    self.request_cache ||= Datapimp::GithubClient.request_cache
+    self.response_cache ||= Datapimp::GithubClient.response_cache
 
     def initialize(type,params,headers)
       @type = type

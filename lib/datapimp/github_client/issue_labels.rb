@@ -1,61 +1,65 @@
-  module Datapimp::GithubClient
-    class IssueLabels < GithubClient::Request
-      Defaults = {
-        # stage labels
-        "s:backlog"       => "c7def8",
-        "s:greenlit"      => "bfe5bf",
-        "s:review"        => "fef2c0",
-        "s:in_progress"   => "3ded58",
+module Datapimp::GithubClient
+  class IssueLabels < Request
 
-        # priority labels
-        "p:1"             => "e11d21",
-        "p:2"             => "eb6420",
+    requires :org, :repo
 
-        # type labels
-        "t:development"   => "bada55",
-        "t:design"        => "55adba",
-        "t:ux"            => "2234fe",
-        "t:project"       => "ae3498",
+    def endpoint
+      "repos/#{ org }/#{ repo }/labels"
+    end
 
-        # acceptance labels
-        "a:approved"      => "339933",
-        "a:rejected"      => "993333"
-      }
+    Defaults = {
+      # stage labels
+      "s:backlog"       => "c7def8",
+      "s:greenlit"      => "bfe5bf",
+      "s:review"        => "fef2c0",
+      "s:in_progress"   => "3ded58",
 
-      def missing_defaults
-        current = all.collect(&:name)
-        @missing_defaults ||= Defaults.keys - current
-      end
+      # priority labels
+      "p:1"             => "e11d21",
+      "p:2"             => "eb6420",
 
-      def missing_defaults?
-        missing_defaults.length > 0
-      end
+      # type labels
+      "t:development"   => "bada55",
+      "t:design"        => "55adba",
+      "t:ux"            => "2234fe",
+      "t:project"       => "ae3498",
 
-      def create_status_sort_labels
-        Defaults.each do |name, color|
-          create_or_update(name, color)
-        end
-      end
+      # acceptance labels
+      "a:approved"      => "339933",
+      "a:rejected"      => "993333"
+    }
 
-      def delete_github_defaults
-        %w{bug duplicate enhancement invalid wontfix question}.each do |name|
-          destroy(name)
-        end
-      end
+    def missing_defaults
+      current = all.collect(&:name)
+      @missing_defaults ||= Defaults.keys - current
+    end
 
-      def create_or_update name, color
-        existing = show(name)
+    def missing_defaults?
+      missing_defaults.length > 0
+    end
 
-        unless existing.nil? || (existing.present? && existing.respond_to?(:message))
-          update(name, name: name, color: color)
-          return show(name)
-        end
-
-        create(name: name, color: color)
-      end
-
-      def endpoint
-        "repos/#{ org }/#{ repo }/labels"
+    def create_status_sort_labels
+      Defaults.each do |name, color|
+        create_or_update(name, color)
       end
     end
+
+    def delete_github_defaults
+      %w{bug duplicate enhancement invalid wontfix question}.each do |name|
+        destroy(name)
+      end
+    end
+
+    def create_or_update name, color
+      existing = show(name)
+
+      unless existing.nil? || (existing.present? && existing.respond_to?(:message))
+        update(name, name: name, color: color)
+        return show(name)
+      end
+
+      create(name: name, color: color)
+    end
+
   end
+end

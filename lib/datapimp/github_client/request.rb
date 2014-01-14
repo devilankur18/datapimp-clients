@@ -1,16 +1,48 @@
 class Datapimp::GithubClient::Request
 
+  MissingArguments = Class.new(Exception)
+
   attr_accessor :options, :user, :org, :repo, :params, :headers, :github_token
 
-  def initialize(options={})
-    @options = options.dup
+  class_attribute :_requires_arguments
 
-    @user, @org, @repo, @github_token = options.values_at(:user,:org,:repo,:github_token)
+  def self.requires *args
+    (self._requires_arguments = args).uniq!
+  end
+
+  def self.required_arguments
+    Array(self._requires_arguments).uniq
+  end
+
+  def initialize(options={}, &block)
+    @options = options.with_indifferent_access.dup
+    @client, @user, @org, @repo, @github_token = options.values_at(:client, :user,:org,:repo,:github_token)
     @params   = options[:params] || {}
     @headers  = options[:headers] || {}
 
-    @user ||= Datapimp.config.profile.github_nickname
-    @org ||= Datapimp.config.profile.github_organization
+    instance_eval(&blk) if block_given?
+
+    assert_valid_arguments!
+  end
+
+  def with_valid_arguments &blk
+    instance_eval(&blk) if block_given?
+    assert_valid_arguments!
+    self
+  end
+
+  def assert_valid_arguments!
+    return true if required_arguments.length > 0
+
+    valid = required_arguments.all? do |arg|
+      test = false
+      test = true if !!self.send(arg).present?
+      test = true if options.has_key?(arg)
+
+      test
+    end
+
+    raise MissingArguments unless valid
   end
 
   def to_object
@@ -26,27 +58,29 @@ class Datapimp::GithubClient::Request
   end
 
   def create params={}
-    client.post_request(endpoint, params).request.run
+    client.post_request(request_endpoint, params).request.run
   end
 
   def update record_id, params={}
-    client.update_request("#{ endpoint }/#{ record_id }", params).request.run
+    client.update_request("#{ request_endpoint }/#{ record_id }", params).request.run
   end
 
   def destroy record_id, params={}
-    client.delete_request("#{ endpoint }/#{ record_id }").request.run
+    client.delete_request("#{ request_endpoint }/#{ record_id }").request.run
   end
 
   def show record_id, params={}
-    client.get_request("#{ endpoint }/#{ record_id }", params).to_object
+    client.get_request("#{ request_endpoint }/#{ record_id }", params).to_object
   end
 
   def client
+    return @client if @client
+
     if impersonate_user.present?
-      return @client ||= GithubClient::Client.new(user: impersonate_user, headers: headers, github_token: github_token)
+      @client = GithubClient::Client.new(user: impersonate_user, headers: headers, github_token: github_token)
     end
 
-    @client ||= Datapimp.github_client
+    @client = Datapimp.github_client
   end
 
   def records
@@ -61,12 +95,39 @@ class Datapimp::GithubClient::Request
     records
   end
 
+  def request_endpoint
+    options.fetch(:endpoint, endpoint)
+  end
+
   def request
-    @request ||= client.get_request(endpoint, params)
+    @request ||= client.get_request(request_endpoint, params)
+  end
+
+  def organization_or_user
+    supplied_org.presence || user
+  end
+
+  def user_or_organization
+    supplied_user || supplied_org
   end
 
   def org
-    (@org.nil? || @org.empty?) ? user : @org
+    organization_or_user
+  end
+
+  # The idea of 'supplied' means it was provided to the object
+  # and not calculated in any way.  This is used when determining
+  # the value for the endpoint, in the context of a github user vs github organization
+  def supplied_org
+    @org
+  end
+
+  def supplied_user
+    @user
+  end
+
+  def supplied_repo
+    @repo
   end
 
   protected

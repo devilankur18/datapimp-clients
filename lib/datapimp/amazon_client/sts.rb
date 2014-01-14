@@ -1,7 +1,7 @@
 require "rubygems"
 require "aws-sdk"
 
-module AmazonClient
+module Datapimp::AmazonClient
   class STS
     DefaultDuration = 60 * 60
 

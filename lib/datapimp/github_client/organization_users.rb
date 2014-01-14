@@ -1,15 +1,9 @@
-  module Datapimp::Github
-    class OrganizationUsers < Request
-      def org
-        @org || Datapimp.profile.github_organization
-      end
+module Datapimp::GithubClient
+  class OrganizationUsers < Request
+    requires :supplied_org
 
-      def endpoint
-        options[:endpoint] || "orgs/#{ org }/members"
-      end
-
-      def self.logins
-        new(user:"mantrabot").all.map(&:login)
-      end
+    def endpoint
+      "orgs/#{ org }/members"
     end
   end
+end

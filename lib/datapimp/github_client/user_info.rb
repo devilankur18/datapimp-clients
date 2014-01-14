@@ -1,7 +1,9 @@
-  module Datapimp::GithubClient
-    class UserInfo < Request
-      def endpoint
-        "users/#{ user }"
-      end
+module Datapimp::GithubClient
+  class UserInfo < Request
+    requires :user
+
+    def endpoint
+      "users/#{ user }"
     end
   end
+end

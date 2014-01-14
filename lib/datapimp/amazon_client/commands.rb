@@ -1,5 +1,5 @@
-  module Amazon
-    module Commands
+module Datapimp::AmazonClient
+  module Commands
 
-    end
   end
+end
