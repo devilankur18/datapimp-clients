@@ -34,7 +34,7 @@ class Datapimp::GithubClient::Request
   def assert_valid_arguments!
     return true if required_arguments.length > 0
 
-    valid = required_arguments.all? do |arg|
+    valid = _required_arguments.all? do |arg|
       test = false
       test = true if !!self.send(arg).present?
       test = true if options.has_key?(arg)
