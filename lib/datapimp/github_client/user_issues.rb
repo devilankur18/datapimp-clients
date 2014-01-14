@@ -1,5 +1,5 @@
 module Datapimp::GithubClient
-  class UserIssues < GithubClient::Request
+  class UserIssues < Request
     requires :user
 
     def endpoint
