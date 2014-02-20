@@ -7,6 +7,10 @@ class Datapimp::GithubClient::Client
 
   def initialize options={}
     @options = options
+
+    if options[:auto]
+      options[:github_token] ||= Datapimp::GithubClient::Authentication.new.github_token
+    end
   end
 
   def request_wrapper_class

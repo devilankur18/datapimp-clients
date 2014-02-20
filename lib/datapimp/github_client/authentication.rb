@@ -1,12 +1,18 @@
 module Datapimp::GithubClient
   class Authentication
-    attr_accessor :github_token
+    attr_accessor :github_token, :options
 
     InvalidAuth = Class.new(Exception)
 
     def initialize(options={})
       options.symbolize_keys! if options.is_a?(Hash)
+      @options = options
+      fetch_token
+    end
 
+    protected
+
+    def fetch_token
       @github_token = case
       when options.respond_to?(:github_token)
         options.github_token
@@ -19,11 +25,6 @@ module Datapimp::GithubClient
       else
         raise InvalidAuth
       end
-    end
-
-    protected
-
-    def fetch_token
 
     end
   end

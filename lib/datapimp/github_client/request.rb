@@ -93,7 +93,7 @@ class Datapimp::GithubClient::Request
     return @client if @client
 
     if impersonate_user.present?
-      @client = GithubClient::Client.new(user: impersonate_user, headers: headers, github_token: github_token)
+      @client = Datapimp::GithubClient::Client.new(user: impersonate_user, headers: headers, github_token: github_token)
     end
 
     @client = Datapimp.github_client
