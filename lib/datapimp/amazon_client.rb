@@ -3,7 +3,7 @@ require "aws-sdk"
 module Datapimp::AmazonClient
   mattr_accessor :access_key_id, :secret_access_key
 
-  require 'datapimp-clients/amazon_client/sts'
+  require 'datapimp/amazon_client/sts'
 
   def self.access_key_id
     @@access_key_id || Datapimp.profile.amazon_access_key_id || ENV['ACCESS_KEY_ID']
